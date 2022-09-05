@@ -46,21 +46,36 @@ export interface Move {
   capture?: true;
 }
 
-export type GameState =
-  | "empty"
-  | "waiting"
-  | "pending"
-  | "ready"
-  | "playing"
-  | "ended";
-
-export type GameStatus = "normal" | "check" | "end";
-
-export interface Game {
+interface BaseGame {
   id: string;
   timeControl: string;
-  state: GameState;
-  status: GameStatus;
+  chatID: string;
+}
+
+interface GameEmpty extends BaseGame {
+  state: "empty";
+}
+
+interface GameWaiting extends BaseGame {
+  state: "waiting";
+  user0: User;
+}
+
+interface GamePending extends BaseGame {
+  state: "pending";
+  user0: User;
+  user1: User;
+}
+
+interface GameReady extends BaseGame {
+  state: "ready";
+  user0: User;
+  user1: User;
+}
+
+interface GameComplete extends BaseGame {
+  state: "playing" | "ended";
+  status: "normal" | "check" | "end";
   turn: "w" | "b";
   fen: string;
   board: string[][];
@@ -72,5 +87,11 @@ export interface Game {
   pblack: Player;
   user0: User;
   user1: User;
-  chatID: string;
 }
+
+export type Game =
+  | GameEmpty
+  | GameWaiting
+  | GameReady
+  | GamePending
+  | GameComplete;
