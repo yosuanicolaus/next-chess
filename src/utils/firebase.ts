@@ -13,8 +13,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
 
-export const gamesRef = ref(db, "games");
-export const usersRef = ref(db, "users");
-export const chatsRef = ref(db, "chats");
+export const db = getDatabase(app);
+export const dbRef = ref(db);
+export const gamesRef = (gameID?: string) => ref(db, `/games/${gameID}`);
+export const usersRef = (userID?: string) => ref(db, `/users/${userID}`);
+export const chatsRef = (chatID?: string) => ref(db, `/chats/${chatID}`);
