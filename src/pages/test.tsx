@@ -1,7 +1,7 @@
-import { ref, set } from "firebase/database";
 import { useState } from "react";
-import { db, dbRef } from "../lib/firebase";
+import { dbRef } from "../lib/firebase";
 import { useObjectVal } from "react-firebase-hooks/database";
+import { createNewUser } from "../lib/db/user";
 
 export default function Test() {
   const [inputText, setInputText] = useState("");
@@ -13,9 +13,10 @@ export default function Test() {
         <h1 className="text-3xl">Test Page</h1>
 
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            set(ref(db, inputText), {});
+            const user = await createNewUser("testuid1234");
+            console.log(user);
           }}
         >
           <input
