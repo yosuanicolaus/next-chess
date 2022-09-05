@@ -1,6 +1,6 @@
 import { ref, set } from "firebase/database";
 import { useState } from "react";
-import { db, dbRef } from "../utils/firebase";
+import { db, dbRef } from "../lib/firebase";
 import { useObjectVal } from "react-firebase-hooks/database";
 
 export default function Test() {

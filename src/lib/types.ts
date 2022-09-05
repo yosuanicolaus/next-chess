@@ -56,7 +56,7 @@ export type GameState =
 
 export type GameStatus = "normal" | "check" | "end";
 
-export interface GameModel {
+export interface Game {
   id: string;
   timeControl: string;
   state: GameState;
