@@ -10,7 +10,7 @@ const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lower = "abcdefghijklmnopqrstuvwxyz";
 const alphabet = numbers + upper + lower;
 
-export const generateGameID = customAlphabet(alphabet, 10);
+export const generateID = customAlphabet(alphabet, 10);
 
 export function generateName() {
   let name = uniqueNamesGenerator({
