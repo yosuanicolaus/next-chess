@@ -1,6 +1,7 @@
 import { set } from "firebase/database";
 import { usersRef } from "../firebase";
-import { Player, User } from "../types";
+import { Player } from "../types";
+import { User } from "../types";
 import { generateName } from "../utils";
 
 export async function createNewUser(uid: string) {

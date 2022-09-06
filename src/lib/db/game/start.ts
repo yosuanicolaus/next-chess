@@ -1,7 +1,7 @@
 import { set } from "firebase/database";
 import { gamesRef } from "../../firebase";
 import { Game } from "../../types";
-import { defaultBoard, defaultFen, defaultMoves, defaultTurn } from "../data";
+import { defaultBoard, defaultFen, defaultMoves, defaultTurn } from "./_data";
 import { createPlayer } from "../user";
 
 export function startGame(game: Game) {

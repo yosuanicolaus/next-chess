@@ -1,7 +1,9 @@
 import { set } from "firebase/database";
 import { gamesRef } from "../../firebase";
-import { ChessData, Game, Move } from "../../types";
-import { createPgn, getLastRecordsDiff } from "../utils";
+import { Game } from "../../types";
+import { ChessData } from "../../types";
+import { Move } from "../../types";
+import { createPgn, getLastRecordsDiff } from "./_utils";
 
 export function updateChessData(
   game: Game,

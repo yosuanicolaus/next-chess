@@ -1,6 +1,7 @@
 import { set } from "firebase/database";
 import { gamesRef } from "../../firebase";
-import { Game, TransformGame, User } from "../../types";
+import { Game, TransformGame } from "../../types";
+import { User } from "../../types";
 
 export async function leaveGame(game: Game, user: User) {
   const newGame: TransformGame = game;

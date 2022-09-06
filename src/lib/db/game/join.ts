@@ -1,6 +1,7 @@
 import { get, set } from "firebase/database";
 import { gamesRef } from "../../firebase";
-import { TransformGame, User } from "../../types";
+import { TransformGame } from "../../types";
+import { User } from "../../types";
 
 export async function joinGame(gameID: string, user: User) {
   const gameSnapshot = await get(gamesRef(gameID));
