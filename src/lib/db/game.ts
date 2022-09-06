@@ -27,7 +27,7 @@ export async function joinGame(gameID: string, user: User) {
     game.state = "pending";
     game.user1 = user;
   } else if (game.state === "pending" || game.state === "ready") {
-    return null;
+    return;
   } else if (game.state === "playing" || game.state === "ended") {
     if (user.uid === game.pwhite?.uid) {
       game.pwhite.online = true;
@@ -35,6 +35,43 @@ export async function joinGame(gameID: string, user: User) {
       game.pblack.online = true;
     }
   }
-  await set(gamesRef(gameID), game);
-  return game;
+  set(gamesRef(gameID), game);
+}
+
+export async function leaveGame(game: Game, user: User) {
+  const newGame: TransformGame = game;
+
+  if (game.state === "empty") {
+    return;
+  } else if (game.state === "waiting") {
+    newGame.state = "empty";
+    newGame.user0 = undefined;
+  } else if (user.uid !== game.user0?.uid || user.uid !== game.user1?.uid) {
+    return;
+  } else if (game.state === "pending" || game.state === "ready") {
+    newGame.state = "waiting";
+    if (user.uid === game.user0?.uid) {
+      newGame.user0 = game.user1;
+      newGame.user1 = undefined;
+    } else if (user.uid === game.user1?.uid) {
+      newGame.user1 = undefined;
+    }
+  } else if (game.state === "playing" || game.state === "ended") {
+    if (user.uid === game.pwhite.uid && newGame.pwhite) {
+      newGame.pwhite.online = false;
+    } else if (user.uid === game.pblack.uid && newGame.pblack) {
+      newGame.pblack.online = false;
+    }
+  }
+  set(gamesRef(game.id), newGame);
+}
+
+export async function toggleReady(game: Game) {
+  const newGame: TransformGame = game;
+  if (game.state === "pending") {
+    newGame.state = "ready";
+  } else if (game.state === "ready") {
+    newGame.state = "pending";
+  }
+  set(gamesRef(game.id), newGame);
 }
