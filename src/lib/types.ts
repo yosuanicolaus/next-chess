@@ -95,3 +95,19 @@ export type Game =
   | GameReady
   | GamePending
   | GameComplete;
+
+export interface TransformGame extends BaseGame {
+  state?: "empty" | "waiting" | "pending" | "ready" | "playing" | "ended";
+  status?: "normal" | "check" | "end";
+  turn?: "w" | "b";
+  fen?: string;
+  board?: string[][];
+  moves?: Move[];
+  history?: string[];
+  records?: number[];
+  pgn?: string;
+  pwhite?: Player;
+  pblack?: Player;
+  user0?: User;
+  user1?: User;
+}

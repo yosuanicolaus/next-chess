@@ -2,6 +2,7 @@ import { useState } from "react";
 import { dbRef } from "../lib/firebase";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { createNewUser } from "../lib/db/user";
+import { joinGame } from "../lib/db/game";
 
 export default function Test() {
   const [inputText, setInputText] = useState("");
@@ -17,6 +18,9 @@ export default function Test() {
             e.preventDefault();
             const user = await createNewUser("testuid1234");
             console.log(user);
+
+            const game = await joinGame("VKBz9F7D63", user);
+            console.log(game);
           }}
         >
           <input
