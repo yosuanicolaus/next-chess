@@ -30,6 +30,7 @@ export function updateChessData(
   const newGame: Game = {
     state,
     status,
+    difference,
     turn,
     fen,
     board,

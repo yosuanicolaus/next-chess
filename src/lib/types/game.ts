@@ -7,6 +7,21 @@ interface BaseGame {
   timeControl: string;
   chatID: string;
 }
+interface CompleteGame extends BaseGame {
+  status: "normal" | "check" | "end";
+  difference: number;
+  turn: "w" | "b";
+  fen: string;
+  board: string[][];
+  moves: Move[];
+  history: string[];
+  records: number[];
+  pgn: string;
+  pwhite: Player;
+  pblack: Player;
+  user0: User;
+  user1: User;
+}
 interface GameEmpty extends BaseGame {
   state: "empty";
 }
@@ -24,20 +39,8 @@ interface GameReady extends BaseGame {
   user0: User;
   user1: User;
 }
-interface GameComplete extends BaseGame {
+interface GameComplete extends CompleteGame {
   state: "playing" | "ended";
-  status: "normal" | "check" | "end";
-  turn: "w" | "b";
-  fen: string;
-  board: string[][];
-  moves: Move[];
-  history: string[];
-  records: number[];
-  pgn: string;
-  pwhite: Player;
-  pblack: Player;
-  user0: User;
-  user1: User;
 }
 
 export type Game =
@@ -47,18 +50,6 @@ export type Game =
   | GamePending
   | GameComplete;
 
-export interface TransformGame extends BaseGame {
-  state?: "empty" | "waiting" | "pending" | "ready" | "playing" | "ended";
-  status?: "normal" | "check" | "end";
-  turn?: "w" | "b";
-  fen?: string;
-  board?: string[][];
-  moves?: Move[];
-  history?: string[];
-  records?: number[];
-  pgn?: string;
-  pwhite?: Player;
-  pblack?: Player;
-  user0?: User;
-  user1?: User;
+export interface TransformGame extends Partial<CompleteGame> {
+  state: "empty" | "waiting" | "pending" | "ready" | "playing" | "ended";
 }
