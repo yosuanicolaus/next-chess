@@ -38,7 +38,7 @@ export interface Move {
     file: number;
   };
   piece: string;
-  faction: "w" | "b";
+  faction: string;
   san: string;
   lan: string;
   uci: string;
@@ -111,3 +111,12 @@ export interface TransformGame extends BaseGame {
   user0?: User;
   user1?: User;
 }
+
+export type ChessData = {
+  status: "normal" | "check" | "end";
+  difference: number;
+  turn: "w" | "b";
+  fen: string;
+  board: string[][];
+  moves: Move[];
+};
