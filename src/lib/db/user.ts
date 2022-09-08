@@ -1,4 +1,4 @@
-import { set } from "firebase/database";
+import { get, set } from "firebase/database";
 import { usersRef } from "../firebase";
 import { Player } from "../types";
 import { User } from "../types";
@@ -26,4 +26,10 @@ export function createPlayer(user: User, timeControl: string) {
     time: tcMinutes * 60_000,
   };
   return player;
+}
+
+export async function getUserByUID(uid: string) {
+  const snapshot = await get(usersRef(uid));
+  const user: User = snapshot.val();
+  return user;
 }
