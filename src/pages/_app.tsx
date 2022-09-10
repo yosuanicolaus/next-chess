@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import type { AppType } from "next/dist/shared/lib/utils";
 import { AuthProvider } from "../lib/contexts/auth";
 import Head from "next/head";
+import Footer from "../components/common/Footer";
+import Navbar from "../components/common/Navbar";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -13,7 +15,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
       <Wrapper>
         <AuthProvider>
-          <Component {...pageProps} />
+          <>
+            <Navbar />
+            <Component {...pageProps} />
+            <Footer />
+          </>
         </AuthProvider>
       </Wrapper>
     </>
