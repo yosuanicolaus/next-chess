@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { createNewUser, getUserByUID } from "../db/user";
 import { auth } from "../firebase";
 import { User } from "../types";
+import LoadingFull from "../../components/common/LoadingFull";
 
 const AuthContext = createContext<User>({} as User);
 
@@ -31,7 +32,7 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
     return unsubscribe;
   }, []);
 
-  if (!user) return <div>signing in...</div>;
+  if (!user) return <LoadingFull text="signing in..." />;
 
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }
