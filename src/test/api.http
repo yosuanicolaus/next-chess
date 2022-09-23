@@ -1,0 +1,9 @@
+@host = http://localhost:3000/api/
+@gameID = 7pw8OlmTIT
+
+GET {{host}}/user/create HTTP/1.1
+content-type: application/json
+
+{
+    "uid": "testuid123123"
+}
