@@ -4,7 +4,7 @@ import { User } from "../../../lib/types";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<User>
+  res: NextApiResponse<User | null>
 ) {
   const { uid } = req.query;
   if (typeof uid !== "string") {

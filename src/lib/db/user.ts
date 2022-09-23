@@ -30,6 +30,6 @@ export function createPlayer(user: User, timeControl: string) {
 
 export async function getUserByUID(uid: string) {
   const snapshot = await get(usersRef(uid));
-  const user: User = snapshot.val();
+  const user: User | null = snapshot.val();
   return user;
 }
