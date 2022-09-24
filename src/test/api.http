@@ -7,3 +7,11 @@ content-type: application/json
 {
     "uid": "testuid123123"
 }
+
+###
+GET {{host}}/game/p7rrohec5c/leave HTTP/1.1
+content-type: application/json
+
+{
+    "user": "testuser"
+}
