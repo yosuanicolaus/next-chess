@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Loading({ text }: { text: string }) {
   return (
-    <div className="flex bg-slate-700 text-neutral-200 text-md justify-center items-center max-w-max rounded-full p-3 animate-pulse">
+    <div className="text-md flex max-w-max animate-pulse items-center justify-center rounded-full bg-slate-700 p-3 text-neutral-200">
       <Image
         src={"/assets/loading.svg"}
         className="animate-spin"

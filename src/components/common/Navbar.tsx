@@ -8,27 +8,27 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="flex bg-zinc-700 text-neutral-100 p-5">
+    <nav className="flex bg-zinc-700 p-5 text-neutral-100">
       {/* for large screen */}
-      <div className="flex-grow sm:flex hidden items-center gap-5">
+      <div className="hidden flex-grow items-center gap-5 sm:flex">
         <Link href="/">
-          <a className="text-2xl hover:text-green-300 transition">LogiChess</a>
+          <a className="text-2xl transition hover:text-green-300">LogiChess</a>
         </Link>
         <Link href="/game">
-          <a className="hover:text-green-300 transition">Game</a>
+          <a className="transition hover:text-green-300">Game</a>
         </Link>
         <Link href={`user/${user.name}`}>
-          <a className="ml-auto hover:text-green-300 transition-colors">
+          <a className="ml-auto transition-colors hover:text-green-300">
             {user.name}
           </a>
         </Link>
       </div>
 
       {/* for small screen */}
-      <div className="flex-grow sm:hidden flex flex-col">
+      <div className="flex flex-grow flex-col sm:hidden">
         <div className="flex">
           <Link href="/">
-            <a className="text-2xl hover:text-green-300 transition">
+            <a className="text-2xl transition hover:text-green-300">
               LogiChess
             </a>
           </Link>

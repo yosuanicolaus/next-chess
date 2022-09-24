@@ -10,7 +10,7 @@ export default function Test() {
 
   return (
     <>
-      <main className="container p-4 min-h-screen mx-auto bg-slate-100 border-x-4">
+      <main className="container mx-auto min-h-screen border-x-4 bg-slate-100 p-4">
         <h1 className="text-3xl">Test Page</h1>
 
         <form

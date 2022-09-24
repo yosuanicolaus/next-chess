@@ -4,6 +4,7 @@ import { AuthProvider } from "../lib/contexts/auth";
 import Head from "next/head";
 import Footer from "../components/common/Footer";
 import Navbar from "../components/common/Navbar";
+import { Background } from "../components/common/Background";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -13,6 +14,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Background />
       <Wrapper>
         <AuthProvider>
           <>
@@ -29,5 +31,5 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 export default MyApp;
 
 function Wrapper({ children }: { children: JSX.Element }) {
-  return <div className="min-h-screen flex flex-col">{children}</div>;
+  return <div className="flex min-h-screen flex-col">{children}</div>;
 }
