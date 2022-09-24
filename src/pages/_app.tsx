@@ -29,5 +29,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 export default MyApp;
 
 function Wrapper({ children }: { children: JSX.Element }) {
-  return <div className="flex min-h-screen flex-col">{children}</div>;
+  return (
+    <div className="flex min-h-screen flex-col dark:text-neutral-100">
+      {children}
+    </div>
+  );
 }
