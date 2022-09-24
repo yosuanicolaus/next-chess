@@ -5,11 +5,15 @@ import { auth } from "../firebase";
 import { User } from "../types";
 import LoadingFull from "../../components/common/LoadingFull";
 
-const AuthContext = createContext<User>({} as User);
+const AuthContext = createContext({} as User);
 
 export const useUser = () => useContext(AuthContext);
 
-export function AuthProvider({ children }: { children: JSX.Element }) {
+type AuthProviderType = {
+  children: JSX.Element | JSX.Element[];
+};
+
+export function AuthProvider({ children }: AuthProviderType) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {

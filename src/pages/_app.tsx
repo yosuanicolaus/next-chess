@@ -17,11 +17,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <Background />
       <Wrapper>
         <AuthProvider>
-          <>
-            <Navbar />
-            <Component {...pageProps} />
-            <Footer />
-          </>
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
         </AuthProvider>
       </Wrapper>
     </>

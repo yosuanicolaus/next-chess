@@ -22,6 +22,7 @@ interface CompleteGame extends BaseGame {
   user0: User;
   user1: User;
 }
+
 interface GameEmpty extends BaseGame {
   state: "empty";
 }
