@@ -1,6 +1,7 @@
 import { Move } from "./move";
 import { Player } from "./player";
 import { User } from "./user";
+import { Nullable } from "./utils";
 
 interface BaseGame {
   id: string;
@@ -51,6 +52,6 @@ export type Game =
   | GamePending
   | GameComplete;
 
-export interface TransformGame extends Partial<CompleteGame> {
+export interface TransformGame extends Nullable<Partial<CompleteGame>> {
   state: "empty" | "waiting" | "pending" | "ready" | "playing" | "ended";
 }
