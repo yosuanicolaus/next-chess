@@ -9,16 +9,20 @@ export async function leaveGame(game: Game, user: User) {
   if (game.state === "empty") {
     return;
   } else if (game.state === "waiting") {
-    newGame.state = "empty";
-    newGame.user0 = undefined;
-  } else if (user.uid !== game.user0?.uid || user.uid !== game.user1?.uid) {
+    if (game.user0.uid === user.uid) {
+      newGame.state = "empty";
+      newGame.user0 = undefined;
+    } else {
+      return;
+    }
+  } else if (user.uid !== game.user0.uid || user.uid !== game.user1.uid) {
     return;
   } else if (game.state === "pending" || game.state === "ready") {
     newGame.state = "waiting";
-    if (user.uid === game.user0?.uid) {
+    if (user.uid === game.user0.uid) {
       newGame.user0 = game.user1;
       newGame.user1 = undefined;
-    } else if (user.uid === game.user1?.uid) {
+    } else if (user.uid === game.user1.uid) {
       newGame.user1 = undefined;
     }
   } else if (game.state === "playing" || game.state === "ended") {

@@ -1,10 +1,12 @@
 # LogiChess
 
-### Tech stack used:
+### Tech Stack:
 
-- Next JS (TypeScript)
+- React + Next JS
+- TypeScript
 - Tailwind CSS
-- Firebase auth & database
-- LogiChess chess library
+- Firebase Authentication
+- Firebase Realtime Database
+- [LogiChess chess library](https://github.com/yosuanicolaus/logichess)
 
-This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
+This app was bootstrapped using [create-t3-app](https://github.com/t3-oss/create-t3-app)

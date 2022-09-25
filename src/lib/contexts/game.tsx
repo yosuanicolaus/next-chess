@@ -22,15 +22,10 @@ export function GameProvider({ id, children }: PropsWithChildren<PropsType>) {
   const game = gameVal as Game;
 
   useEffect(() => {
-    console.log("entered game", id);
+    console.log("entering game", id);
 
     return () => {
-      console.log(`leaving /game/${id}`);
-      fetch("/api/test", {
-        body: JSON.stringify({
-          name: "JOHN",
-        }),
-      });
+      console.log("leaving game", id);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

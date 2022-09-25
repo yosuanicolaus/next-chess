@@ -11,8 +11,10 @@ export async function joinGame(gameID: string, user: User) {
     game.state = "waiting";
     game.user0 = user;
   } else if (game.state === "waiting") {
-    game.state = "pending";
-    game.user1 = user;
+    if (game.user0?.uid !== user.uid) {
+      game.state = "pending";
+      game.user1 = user;
+    } else return;
   } else if (game.state === "pending" || game.state === "ready") {
     return;
   } else if (game.state === "playing" || game.state === "ended") {

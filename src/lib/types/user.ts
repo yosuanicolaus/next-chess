@@ -4,3 +4,5 @@ export interface User {
   elo: number;
   createdAt: string;
 }
+
+export type Role = "spectator" | "user0" | "user1" | "pwhite" | "pblack";
