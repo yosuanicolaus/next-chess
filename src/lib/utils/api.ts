@@ -1,3 +1,5 @@
+import { Chat, Game, User } from "../types";
+
 async function fetchApi<ResponseData = void>(
   path: string,
   bodyData?: Record<string, unknown>
@@ -21,6 +23,31 @@ async function fetchApi<ResponseData = void>(
 }
 
 export function apiTest() {
-  type ResponseType = { name: string };
-  return fetchApi<ResponseType>("/api/test", { id: "asdfID123" });
+  type ApiTestData = { name: string };
+  return fetchApi<ApiTestData>("/api/test", { id: "asdfID123" });
+}
+
+export function apiIndex() {
+  type AllDbData = {
+    games: Game[];
+    users: User[];
+    chats: Chat[];
+  };
+  return fetchApi<AllDbData>("/api/");
+}
+
+export function apiUserCreate(uid: string) {
+  return fetchApi<User>("/api/user/create", { uid });
+}
+
+export function apiUserUid(uid: string) {
+  return fetchApi<User>(`/api/user/${uid}`);
+}
+
+export function apiGameId(id: string) {
+  return fetchApi<Game>(`/api/game/${id}`);
+}
+
+export function apiGameIdLeave(id: string, user: User) {
+  return fetchApi(`/api/game/${id}/leave`, { user });
 }
