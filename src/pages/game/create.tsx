@@ -30,7 +30,7 @@ export default function CreateGamePage() {
       <h1 className="mb-6 text-3xl">Create Room</h1>
 
       <form className="container grid max-w-sm gap-4" onSubmit={handleSubmit}>
-        <div className="rounded-xl border-2 border-gray-500 bg-gradient-to-br from-slate-100/90 to-slate-300/90 p-4 shadow dark:border-gray-300 dark:from-zinc-600/80 dark:to-zinc-800/80">
+        <div className="grad-slate rounded-xl border-2 border-gray-500 bg-gradient-to-br p-4 shadow dark:border-gray-300">
           <label htmlFor="inputMinutes">
             Minutes per side: <strong>{customMinutes}</strong>
           </label>
@@ -65,7 +65,7 @@ export default function CreateGamePage() {
             }
           />
         </div>
-        <button className="rounded-xl border-2 border-gray-500 bg-gradient-to-br from-slate-100 to-slate-300 p-1 text-center transition hover:from-slate-50 hover:to-slate-200 dark:border-gray-300 dark:from-zinc-600 dark:to-zinc-800 dark:hover:from-zinc-500 dark:hover:to-zinc-700">
+        <button className="grad-slate hover-grad-slate rounded-xl border-2 border-gray-500 bg-gradient-to-t p-1 text-center transition  dark:border-gray-300 ">
           <div className="text-lg">
             <strong>{timeControl}</strong>
           </div>

@@ -21,10 +21,10 @@ export default function JoinGamePage() {
           placeholder="insert game ID here..."
           value={gameId}
           onChange={(e) => setGameId(e.target.value)}
-          className="my-4 w-full rounded-xl border-2 border-slate-600 bg-slate-100 p-2 text-center dark:border-slate-300 dark:bg-slate-700"
+          className="my-4 w-full rounded-xl border-2 border-slate-600 bg-slate-100 p-2 text-center hover:bg-slate-200 dark:border-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600"
         />
 
-        <button className="w-36 rounded-xl border-2 border-slate-600 bg-slate-100 p-2 dark:border-slate-300 dark:bg-slate-700">
+        <button className="w-36 rounded-xl border-2 border-slate-600 bg-slate-100 p-2 hover:bg-slate-200 dark:border-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600">
           Join Game
         </button>
       </form>

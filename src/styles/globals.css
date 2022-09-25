@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.grad-zinc {
+  @apply from-zinc-300 to-zinc-100  dark:from-zinc-800 dark:to-zinc-600;
+}
+
+.grad-slate {
+  @apply from-slate-300 to-slate-100 dark:from-slate-800 dark:to-slate-600;
+}
+
+.hover-grad-zinc {
+  @apply hover:from-zinc-200 hover:to-zinc-400 dark:hover:from-zinc-500 dark:hover:to-zinc-700;
+}
+
+.hover-grad-slate {
+  @apply hover:from-slate-200 hover:to-slate-50 dark:hover:from-slate-500 dark:hover:to-slate-700;
+}
