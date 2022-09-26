@@ -1,30 +1,19 @@
 import { GetServerSideProps } from "next";
-import { useObjectVal } from "react-firebase-hooks/database";
-import LoadingFull from "../../components/common/LoadingFull";
 import { GameProvider } from "../../lib/contexts/game";
-import { gamesRef } from "../../lib/firebase";
-import { Game } from "../../lib/types";
+import { IdString } from "../../lib/types";
+import { TestGameProvider } from "../../test/TestGameProvider";
 
-type PropsType = {
-  id: string;
-};
-
-export default function GamePage({ id }: PropsType) {
-  const [game, isLoading, error] = useObjectVal<Game>(gamesRef(id));
-
-  if (isLoading) return <LoadingFull text="loading game data..." />;
-  if (error) return console.error(error);
+export default function GamePage({ id }: IdString) {
   return (
     <GameProvider id={id}>
       <main className="flex-grow">
-        <pre>{JSON.stringify(game, null, 4)}</pre>
-        <hr />
+        <TestGameProvider />
       </main>
     </GameProvider>
   );
 }
 
-export const getServerSideProps: GetServerSideProps<PropsType> = async (
+export const getServerSideProps: GetServerSideProps<IdString> = async (
   context
 ) => {
   const { id } = context.query;

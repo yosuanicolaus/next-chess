@@ -2,8 +2,8 @@ import "../styles/globals.css";
 import type { AppType } from "next/dist/shared/lib/utils";
 import { AuthProvider } from "../lib/contexts/auth";
 import Head from "next/head";
-import Footer from "../components/common/Footer";
-import Navbar from "../components/common/Navbar";
+import { Footer } from "../components/common/Footer";
+import { Navbar } from "../components/common/Navbar";
 import { Background } from "../components/common/Background";
 
 const MyApp: AppType = ({ Component, pageProps }) => {

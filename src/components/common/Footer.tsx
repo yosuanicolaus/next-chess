@@ -1,4 +1,4 @@
-export default function Footer() {
+export function Footer() {
   return (
     <div className="bg-gray-300 p-1 text-center text-neutral-700 text-opacity-50 dark:bg-zinc-800 dark:text-neutral-100/50">
       <a

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useUser } from "../../lib/contexts/auth";
 
-export default function Navbar() {
+export function Navbar() {
   const user = useUser();
   const [open, setOpen] = useState(false);
 
@@ -40,13 +40,13 @@ export default function Navbar() {
   );
 }
 
-type NavLinkType = {
+type NavLinkProps = {
   href: string;
   text: string;
   className?: string;
 };
 
-function NavLink({ href, text, className }: NavLinkType) {
+function NavLink({ href, text, className }: NavLinkProps) {
   return (
     <Link href={href}>
       <a
