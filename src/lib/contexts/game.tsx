@@ -1,42 +1,43 @@
-import { createContext, PropsWithChildren, useContext, useEffect } from "react";
+import { createContext, PropsWithChildren, useContext } from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
 import LoadingFull from "../../components/common/LoadingFull";
 import { GameNotFound } from "../../components/game/GameNotFound";
+import { getUserRole } from "../db/user";
 import { gamesRef } from "../firebase";
-import { Game } from "../types";
+import { useJoinLeaveGame } from "../hooks/join-leave-game";
+import { Game, IdString, Role } from "../types";
+import { useUser } from "./auth";
 
 interface GameContextInterface {
   game: Game;
+  role: Role;
 }
 
 const GameContext = createContext({} as GameContextInterface);
 
 export const useGame = () => useContext(GameContext);
 
-type PropsType = {
-  id: string;
-};
+export function GameProvider({ id, children }: PropsWithChildren<IdString>) {
+  const [gameVal, loading, error] = useObjectVal<Game>(gamesRef(id));
+  const game = gameVal as Game | null | undefined;
+  const user = useUser();
 
-export function GameProvider({ id, children }: PropsWithChildren<PropsType>) {
-  const [gameVal, isLoading, error] = useObjectVal<Game>(gamesRef(id));
-  const game = gameVal as Game;
-
-  useEffect(() => {
-    console.log("entering game", id);
-
-    return () => {
-      console.log("leaving game", id);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (isLoading) return <LoadingFull text="fetching game data..." />;
   if (error) throw error;
+  if (loading) return <LoadingFull text="fetching game data..." />;
   if (!game) return <GameNotFound />;
+  const role = getUserRole(user, game);
 
   return (
-    <GameContext.Provider value={{ game: game }}>
-      {children}
+    <GameContext.Provider value={{ game, role }}>
+      <JoinLeaveHandler>
+        <>{children}</>
+      </JoinLeaveHandler>
     </GameContext.Provider>
   );
+}
+
+function JoinLeaveHandler({ children }: PropsWithChildren) {
+  const { game } = useGame();
+  useJoinLeaveGame(game);
+  return <>{children}</>;
 }
