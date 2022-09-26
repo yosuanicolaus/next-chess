@@ -1,6 +1,6 @@
 import { get, set } from "firebase/database";
 import { usersRef } from "../firebase";
-import { Player } from "../types";
+import { Game, Player, Role } from "../types";
 import { User } from "../types";
 import { generateName } from "../utils";
 
@@ -32,4 +32,20 @@ export async function getUserByUID(uid: string) {
   const snapshot = await get(usersRef(uid));
   const user: User | null = snapshot.val();
   return user;
+}
+
+export function getUserRole(user: User, game: Game) {
+  let role: Role = "spectator";
+
+  if (game.state === "empty") return role;
+  else if (game.state === "waiting") {
+    if (game.user0.uid === user.uid) role = "user0";
+  } else if (game.state === "pending" || game.state === "ready") {
+    if (game.user0.uid === user.uid) role = "user0";
+    else if (game.user1.uid === user.uid) role = "user1";
+  } else {
+    if (game.pwhite.uid === user.uid) role = "pwhite";
+    else if (game.pblack.uid === user.uid) role = "pblack";
+  }
+  return role;
 }
