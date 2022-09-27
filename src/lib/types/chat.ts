@@ -6,7 +6,5 @@ export interface Message {
 }
 
 export interface Chat {
-  id: string;
-  messages: Message[];
-  createdAt: string;
+  [messageID: string]: Message;
 }
