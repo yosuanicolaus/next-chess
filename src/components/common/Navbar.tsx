@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useUser } from "../../lib/contexts/auth";
+import { DarkToggleButton } from "./DarkToggleButton";
 
 export function Navbar() {
   const user = useUser();
@@ -12,19 +13,17 @@ export function Navbar() {
       <div className="hidden flex-grow items-center gap-5 sm:flex">
         <NavLink href="/" text="LogiChess" className="text-2xl" />
         <NavLink href="/game" text="Game" />
-        <NavLink
-          href={`/user/${user.name}`}
-          text={user.name}
-          className="ml-auto"
-        />
+        <DarkToggleButton />
+        <NavLink href={`/user/${user.name}`} text={user.name} />
       </div>
 
       {/* for small screen */}
       <div className="flex flex-grow flex-col sm:hidden">
-        <div className="flex">
+        <div className="flex gap-5">
           <NavLink href="/" text="LogiChess" className="text-2xl" />
+          <DarkToggleButton />
           <button
-            className="ml-auto rounded-lg text-2xl hover:text-cyan-700 dark:hover:text-green-300"
+            className="rounded-lg text-2xl hover:text-cyan-700 dark:hover:text-green-300"
             onClick={() => setOpen((val) => !val)}
           >
             &#9776;
