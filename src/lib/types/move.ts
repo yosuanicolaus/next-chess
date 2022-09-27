@@ -7,8 +7,8 @@ export interface Move {
     rank: number;
     file: number;
   };
-  piece: string;
-  faction: string;
+  piece?: string;
+  faction?: string;
   san: string;
   lan: string;
   uci: string;
