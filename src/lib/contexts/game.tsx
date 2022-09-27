@@ -2,15 +2,21 @@ import { createContext, PropsWithChildren, useContext } from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { LoadingFull } from "../../components/common/LoadingFull";
 import { GameNotFound } from "../../components/game/GameNotFound";
+import { createChessData } from "../chess";
+import { startGame, toggleReady, updateChessData } from "../db/game";
 import { getUserRole } from "../db/user";
 import { gamesRef } from "../firebase";
 import { useJoinLeaveGame } from "../hooks/join-leave-game";
-import { Game, IdString, Role } from "../types";
+import { Game, IdString, Move, Role } from "../types";
 import { useUser } from "./auth";
 
 interface GameContextInterface {
   game: Game;
   role: Role;
+  myTurn: boolean;
+  toggleReady: () => void;
+  startGame: () => void;
+  playMove: (move: Move) => void;
 }
 
 const GameContext = createContext({} as GameContextInterface);
@@ -27,8 +33,23 @@ export function GameProvider({ id, children }: PropsWithChildren<IdString>) {
   if (!game) return <GameNotFound />;
   const role = getUserRole(user, game);
 
+  const contextValue: GameContextInterface = {
+    game,
+    role,
+    myTurn:
+      game.state === "playing" &&
+      ((game.turn === "w" && role === "pwhite") ||
+        (game.turn === "b" && role === "pblack")),
+    toggleReady: () => toggleReady(game),
+    startGame: () => startGame(game),
+    playMove(move: Move) {
+      const chessData = createChessData(move.fenResult);
+      updateChessData(game, chessData, move);
+    },
+  };
+
   return (
-    <GameContext.Provider value={{ game, role }}>
+    <GameContext.Provider value={contextValue}>
       <JoinLeaveHandler>
         <>{children}</>
       </JoinLeaveHandler>
