@@ -9,3 +9,5 @@ export type Nullable<T> = {
 export type IdString = { id: string };
 
 export type GameGame = { game: Game };
+
+export type Theme = "light" | "dark";
