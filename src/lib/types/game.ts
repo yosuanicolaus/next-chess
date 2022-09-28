@@ -24,24 +24,24 @@ interface CompleteGame extends BaseGame {
   user1: User;
 }
 
-interface GameEmpty extends BaseGame {
+export interface GameEmpty extends BaseGame {
   state: "empty";
 }
-interface GameWaiting extends BaseGame {
+export interface GameWaiting extends BaseGame {
   state: "waiting";
   user0: User;
 }
-interface GamePending extends BaseGame {
+export interface GamePending extends BaseGame {
   state: "pending";
   user0: User;
   user1: User;
 }
-interface GameReady extends BaseGame {
+export interface GameReady extends BaseGame {
   state: "ready";
   user0: User;
   user1: User;
 }
-interface GameComplete extends CompleteGame {
+export interface GameComplete extends CompleteGame {
   state: "playing" | "ended";
 }
 
