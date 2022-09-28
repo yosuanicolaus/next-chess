@@ -43,16 +43,26 @@ function EmptyInfo({ game }: { game: GameEmpty }) {
 }
 
 function PreInfo({ game }: { game: GameWaiting | GamePending | GameReady }) {
-  const PreUserInfo = ({ user }: { user: User }) => (
-    <div className="grad-zinc bg-gradient-to-tr">
-      <pre>{JSON.stringify(user, null, 2)}</pre>
+  const PreUserInfo = ({ user }: { user?: User }) => (
+    <div className="grid p-2 text-center italic">
+      <div className="grid h-full w-full place-content-center border-2 border-slate-200 shadow-lg dark:border-slate-500/75">
+        {user ? (
+          <>
+            <div className="font-semibold">{user.name}</div>
+            <div>- {user.elo} -</div>
+          </>
+        ) : (
+          <div className="p-4">waiting for another player to join...</div>
+        )}
+      </div>
     </div>
   );
 
   return (
-    <section className="hidden sm:grid">
-      {game.state === "waiting" && <div>waiting for another player...</div>}
-      {(game.state === "pending" || game.state === "ready") && (
+    <section className="grad-slate hidden bg-gradient-to-b sm:grid">
+      {game.state === "waiting" ? (
+        <PreUserInfo />
+      ) : (
         <PreUserInfo user={game.user1} />
       )}
       <PreUserInfo user={game.user0} />
