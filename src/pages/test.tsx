@@ -1,11 +1,19 @@
-import { useDarkTheme } from "../lib/contexts/dark-theme";
+import { useEffectOnce } from "react-use";
+import { Loading, LoadingFull } from "../components/common/Loading";
 
 const Demo = () => {
-  const { theme, flipTheme } = useDarkTheme();
+  useEffectOnce(() => {
+    console.log("mounting test");
+
+    return () => {
+      console.log("unmounting test");
+    };
+  });
 
   return (
-    <div>
-      <button onClick={flipTheme}>{theme}</button>
+    <div className="flex flex-grow flex-col items-center justify-center">
+      <LoadingFull />
+      <Loading />
     </div>
   );
 };

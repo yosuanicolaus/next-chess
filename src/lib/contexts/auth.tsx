@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { createNewUser, getUserByUID } from "../db/user";
 import { auth } from "../firebase";
 import { User } from "../types";
-import { LoadingFull } from "../../components/common/LoadingFull";
+import { LoadingFull } from "../../components/common/Loading";
 
 const AuthContext = createContext({} as User);
 

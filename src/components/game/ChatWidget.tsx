@@ -5,7 +5,7 @@ import { useGame } from "../../lib/contexts/game";
 import { sendMessage } from "../../lib/db/chat";
 import { chatsRef } from "../../lib/firebase";
 import { Chat, Message } from "../../lib/types";
-import { LoadingFull } from "../common/LoadingFull";
+import { LoadingFull } from "../common/Loading";
 
 export function ChatWidget() {
   const { game } = useGame();

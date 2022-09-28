@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { LoadingFull } from "../../components/common/LoadingFull";
+import { LoadingFull } from "../../components/common/Loading";
 import { Theme } from "../types";
 
 type DarkThemeContextInterface = {

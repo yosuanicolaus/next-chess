@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useContext } from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
-import { LoadingFull } from "../../components/common/LoadingFull";
+import { LoadingFull } from "../../components/common/Loading";
 import { GameNotFound } from "../../components/game/GameNotFound";
 import { createChessData } from "../chess";
 import { startGame, toggleReady, updateChessData } from "../db/game";
