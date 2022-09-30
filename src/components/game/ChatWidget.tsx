@@ -25,7 +25,7 @@ export function ChatWidget() {
 
   return (
     <section className="hidden flex-col sm:order-first sm:flex">
-      <h3 className="border-b-2 border-white bg-slate-200 p-2 text-xl dark:bg-zinc-600">
+      <h3 className="border-b-2 border-white bg-slate-200 p-2 text-xl dark:border-slate-400 dark:bg-zinc-600">
         Chat
       </h3>
       <div className="h-0 flex-grow overflow-y-auto">
@@ -41,9 +41,10 @@ export function ChatWidget() {
         )}
       </div>
       <form
-        className="flex gap-1 border-t-2 border-white bg-slate-300/50 py-2 px-1 dark:bg-slate-600"
+        className="flex gap-1 border-t-2 border-white bg-slate-300/50 py-2 px-1 dark:border-slate-400 dark:bg-slate-600"
         onSubmit={(e) => {
           e.preventDefault();
+          if (textInput.trim() === "") return;
           sendMessage(chatID, textInput, user);
           setTextInput("");
         }}

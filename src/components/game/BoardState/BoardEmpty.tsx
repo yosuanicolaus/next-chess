@@ -10,7 +10,7 @@ export function BoardEmpty() {
     <>
       <div className="italic">Board is empty</div>
       <button
-        className="rounded-xl border border-slate-300 text-sm shadow-md transition hover:bg-slate-600 hover:text-white"
+        className="mt-1 rounded-xl border border-slate-300 py-1 px-2 text-sm shadow-md transition hover:bg-slate-600 hover:text-white"
         onClick={() => joinGame(game.id, user)}
       >
         Join Game
