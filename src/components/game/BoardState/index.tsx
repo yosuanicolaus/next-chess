@@ -1,5 +1,6 @@
 import { useGame } from "../../../lib/contexts/game";
 import { BoardEmpty } from "./BoardEmpty";
+import { BoardWaiting } from "./BoardWaiting";
 
 export function BoardState() {
   const { game } = useGame();
@@ -8,6 +9,7 @@ export function BoardState() {
     case "empty":
       return <BoardEmpty />;
     case "waiting":
+      return <BoardWaiting />;
     case "pending":
     case "ready":
     case "playing":
