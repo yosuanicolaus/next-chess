@@ -1,4 +1,5 @@
 import { useGame } from "../../../lib/contexts/game";
+import { Board } from "../Board";
 import { BoardEmpty } from "./BoardEmpty";
 import { BoardPending } from "./BoardPending";
 import { BoardReady } from "./BoardReady";
@@ -18,7 +19,7 @@ export function BoardState() {
       return <BoardReady />;
     case "playing":
     case "ended":
-    // TODO: create all other board states
+      return <Board />;
     default:
       // TODO: when all state is done, throw error here
       // just for testing
