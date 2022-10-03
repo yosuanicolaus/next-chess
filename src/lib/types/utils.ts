@@ -32,3 +32,5 @@ export type PanelNumberArray = Array8x8<number>;
 export type Position = { x: number; y: number };
 
 export type Positions = Array8x8<Position>;
+
+export type RankFileObject = { rank: RankFile; file: RankFile };

@@ -1,11 +1,13 @@
+import { RankFile } from "./utils";
+
 export interface Move {
   from: {
-    rank: number;
-    file: number;
+    rank: RankFile;
+    file: RankFile;
   };
   to: {
-    rank: number;
-    file: number;
+    rank: RankFile;
+    file: RankFile;
   };
   piece?: string;
   faction?: string;
