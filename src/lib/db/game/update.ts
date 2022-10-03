@@ -47,6 +47,8 @@ export function updateChessData(
     user1,
   };
 
+  if (!newGame.history) newGame.history = [];
+  if (!newGame.records) newGame.records = [];
   newGame.history.push(lastMove.san);
   newGame.records.push(Date.now());
   newGame.pgn = createPgn(newGame.history);

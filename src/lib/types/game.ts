@@ -15,8 +15,8 @@ interface CompleteGame extends BaseGame {
   fen: string;
   board: string[][];
   moves: Move[];
-  history: string[];
-  records: number[];
+  history?: string[];
+  records?: number[];
   pgn: string;
   pwhite: Player;
   pblack: Player;

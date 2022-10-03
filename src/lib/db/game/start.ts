@@ -18,8 +18,6 @@ export function startGame(game: Game) {
     fen: defaultFen,
     board: defaultBoard,
     moves: defaultMoves,
-    history: [],
-    records: [],
     pgn: "",
     user0: game.user0,
     user1: game.user1,
