@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "firebase": "^9.9.4",
-    "logichess": "^0.1.5",
+    "logichess": "^0.1.6",
     "nanoid": "^4.0.0",
     "next": "12.2.5",
     "react": "18.2.0",
