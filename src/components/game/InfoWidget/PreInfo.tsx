@@ -1,10 +1,9 @@
+import { useGame } from "../../../lib/contexts/game";
 import { GamePending, GameReady, GameWaiting, User } from "../../../lib/types";
 
-export function PreInfo({
-  game,
-}: {
-  game: GameWaiting | GamePending | GameReady;
-}) {
+export function PreInfo() {
+  const { game } = useGame<GameWaiting | GamePending | GameReady>();
+
   const PreUserInfo = ({ user }: { user?: User }) => (
     <div className="grid p-2 text-center italic">
       <div className="grid h-full w-full place-content-center border-2 border-slate-200 shadow-lg dark:border-slate-500/75">

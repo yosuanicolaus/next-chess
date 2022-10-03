@@ -11,6 +11,7 @@ import {
 } from "../../components/game/Board/utils";
 import { defaultPanels } from "../../components/game/Board/_default";
 import {
+  GameComplete,
   Move,
   PanelNumberArray,
   Positions,
@@ -40,10 +41,8 @@ export const useBoard = () => useContext(BoardContext);
 export function BoardProvider({ children }: PropsWithChildren) {
   const { size } = useSize();
   const { uid } = useUser();
-  const { game, myTurn, playMove } = useGame();
+  const { game, myTurn, playMove } = useGame<GameComplete>();
   const positions = createPositions(size);
-  if (game.state !== "playing" && game.state !== "ended")
-    throw "invalid game state in BoardProvider";
   const [flipped, setFlipped] = useState(uid === game.pblack.uid);
   const [panels, setPanels] = useState(defaultPanels);
   const [activeMoves, setActiveMoves] = useState<Move[]>([]);

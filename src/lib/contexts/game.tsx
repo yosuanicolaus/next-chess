@@ -21,7 +21,9 @@ interface GameContextInterface {
 
 const GameContext = createContext({} as GameContextInterface);
 
-export const useGame = () => useContext(GameContext);
+export function useGame<GameState extends Game = Game>() {
+  return useContext(GameContext) as GameContextInterface & { game: GameState };
+}
 
 export function GameProvider({ id, children }: PropsWithChildren<IdString>) {
   const [gameVal, loading, error] = useObjectVal<Game>(gamesRef(id));

@@ -21,8 +21,6 @@ export function BoardState() {
     case "ended":
       return <Board />;
     default:
-      // TODO: when all state is done, throw error here
-      // just for testing
-      return <BoardEmpty />;
+      throw "game.state type never";
   }
 }

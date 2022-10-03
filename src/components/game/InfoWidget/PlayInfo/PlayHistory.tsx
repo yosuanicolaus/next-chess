@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useGame } from "../../../../lib/contexts/game";
+import { GameComplete } from "../../../../lib/types";
 
 export function PlayHistory() {
-  const { game } = useGame();
+  const { game } = useGame<GameComplete>();
   if (game.state !== "playing" && game.state !== "ended")
     throw "invalid state in PlayHistory";
   const historyArray = createHistoryArray(game.history);

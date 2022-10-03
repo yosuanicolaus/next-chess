@@ -1,6 +1,8 @@
-import { PlayerGameProps } from "./index";
+import { useGame } from "../../../../lib/contexts/game";
+import { GameComplete, Player } from "../../../../lib/types";
 
-export function PlayerInfo({ player, game }: PlayerGameProps) {
+export function PlayerInfo({ player }: { player: Player }) {
+  const { game } = useGame<GameComplete>();
   const playerTheme =
     player.uid === game.pwhite.uid
       ? "bg-gradient-to-br from-white dark:from-slate-600"

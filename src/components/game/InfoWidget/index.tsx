@@ -6,15 +6,15 @@ import { PreInfo } from "./PreInfo";
 export function InfoWidget() {
   const { game } = useGame();
   if (game.state === "empty") {
-    return <EmptyInfo game={game} />;
+    return <EmptyInfo />;
   } else if (
     game.state === "waiting" ||
     game.state === "pending" ||
     game.state === "ready"
   ) {
-    return <PreInfo game={game} />;
+    return <PreInfo />;
   } else if (game.state === "playing" || game.state === "ended") {
-    return <PlayInfo game={game} />;
+    return <PlayInfo />;
   } else {
     throw new Error("invalid game.state (InfoWidget)");
   }

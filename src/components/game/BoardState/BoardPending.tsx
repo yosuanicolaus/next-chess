@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useUser } from "../../../lib/contexts/auth";
 import { useGame } from "../../../lib/contexts/game";
+import { GamePending } from "../../../lib/types";
 import { Loading } from "../../common/Loading";
 
 export function BoardPending() {
   const { uid } = useUser();
-  const { game } = useGame();
-  if (game.state !== "pending")
-    throw "game state should be pending inside BoardPending";
+  const { game } = useGame<GamePending>();
   const owner = uid === game.user0.uid;
   const challenger = uid === game.user1.uid;
 

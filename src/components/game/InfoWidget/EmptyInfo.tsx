@@ -1,9 +1,12 @@
 import { useUser } from "../../../lib/contexts/auth";
+import { useGame } from "../../../lib/contexts/game";
 import { joinGame } from "../../../lib/db/game";
 import { GameEmpty } from "../../../lib/types";
 
-export function EmptyInfo({ game }: { game: GameEmpty }) {
+export function EmptyInfo() {
+  const { game } = useGame<GameEmpty>();
   const user = useUser();
+
   return (
     <section className="hidden place-content-center gap-3 sm:grid">
       <div className="italic">Game is empty</div>

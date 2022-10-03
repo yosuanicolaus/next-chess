@@ -1,4 +1,5 @@
 import { useUser } from "../../../../lib/contexts/auth";
+import { useGame } from "../../../../lib/contexts/game";
 import { GameComplete, Player } from "../../../../lib/types";
 import { PlayerInfo } from "./PlayerInfo";
 import { PlayHistory } from "./PlayHistory";
@@ -8,7 +9,8 @@ export type PlayerGameProps = {
   game: GameComplete;
 };
 
-export function PlayInfo({ game }: { game: GameComplete }) {
+export function PlayInfo() {
+  const { game } = useGame<GameComplete>();
   const { uid } = useUser();
 
   let playerBottom, playerTop;
@@ -26,13 +28,13 @@ export function PlayInfo({ game }: { game: GameComplete }) {
 
   return (
     <section className="hidden sm:flex sm:flex-col">
-      <PlayerInfo game={game} player={playerTop} />
+      <PlayerInfo player={playerTop} />
       {/* TODO: create PlayerTimer */}
       <div>playertimer</div>
       {/* <div className="flex-grow">(playerhistory)</div> */}
       <PlayHistory />
       <div>playertimer</div>
-      <PlayerInfo game={game} player={playerBottom} />
+      <PlayerInfo player={playerBottom} />
     </section>
   );
 }
