@@ -1,9 +1,11 @@
+import { BoardStringArray } from "../../types";
+
 export const defaultTurn = "w";
 
 export const defaultFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-export const defaultBoard = [
+export const defaultBoard: BoardStringArray = [
   ["r", "n", "b", "q", "k", "b", "n", "r"],
   ["p", "p", "p", "p", "p", "p", "p", "p"],
   [".", ".", ".", ".", ".", ".", ".", "."],

@@ -1,7 +1,7 @@
 import { Move } from "./move";
 import { Player } from "./player";
 import { User } from "./user";
-import { Nullable } from "./utils";
+import { BoardStringArray, Nullable } from "./utils";
 
 interface BaseGame {
   id: string;
@@ -13,7 +13,7 @@ interface CompleteGame extends BaseGame {
   difference: number;
   turn: "w" | "b";
   fen: string;
-  board: string[][];
+  board: BoardStringArray;
   moves: Move[];
   history?: string[];
   records?: number[];
