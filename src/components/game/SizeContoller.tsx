@@ -1,15 +1,15 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSize } from "../../lib/contexts/size";
 
 type SizeControllerProps = {
-  size: number;
-  setSize: Dispatch<SetStateAction<number>>;
   dim: {
     width: number;
     height: number;
   };
 };
 
-export function SizeContoller({ size, setSize, dim }: SizeControllerProps) {
+export function SizeContoller({ dim }: SizeControllerProps) {
+  const { size, setSize } = useSize();
   const maxRatio = 0.9;
   const recommendRatio = 0.75;
   const lowDistanceTreshold = 15;
