@@ -1,6 +1,7 @@
 import { useUser } from "../../../../lib/contexts/auth";
 import { GameComplete, Player } from "../../../../lib/types";
 import { PlayerInfo } from "./PlayerInfo";
+import { PlayHistory } from "./PlayHistory";
 
 export type PlayerGameProps = {
   player: Player;
@@ -28,7 +29,8 @@ export function PlayInfo({ game }: { game: GameComplete }) {
       <PlayerInfo game={game} player={playerTop} />
       {/* TODO: create PlayerTimer */}
       <div>playertimer</div>
-      <div className="flex-grow">(playerhistory)</div>
+      {/* <div className="flex-grow">(playerhistory)</div> */}
+      <PlayHistory />
       <div>playertimer</div>
       <PlayerInfo game={game} player={playerBottom} />
     </section>
