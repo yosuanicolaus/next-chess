@@ -1,6 +1,4 @@
-import { BoardStringArray } from "../../types";
-
-export const defaultTurn = "w";
+import { BoardStringArray, Move } from "../../types";
 
 export const defaultFen =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
@@ -16,7 +14,7 @@ export const defaultBoard: BoardStringArray = [
   ["R", "N", "B", "Q", "K", "B", "N", "R"],
 ];
 
-export const defaultMoves = [
+export const defaultMoves: Move[] = [
   {
     from: { rank: 6, file: 0 },
     to: { rank: 4, file: 0 },

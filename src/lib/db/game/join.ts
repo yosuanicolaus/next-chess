@@ -1,4 +1,4 @@
-import { get, set } from "firebase/database";
+import { get, update } from "firebase/database";
 import { gamesRef } from "../../firebase";
 import { TransformGame } from "../../types";
 import { User } from "../../types";
@@ -24,5 +24,5 @@ export async function joinGame(gameID: string, user: User) {
       game.pblack.online = true;
     }
   }
-  set(gamesRef(gameID), game);
+  update(gamesRef(gameID), game);
 }

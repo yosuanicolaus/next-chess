@@ -1,28 +1,31 @@
-import { set } from "firebase/database";
+import { update } from "firebase/database";
 import { gamesRef } from "../../firebase";
 import { Game } from "../../types";
-import { defaultBoard, defaultFen, defaultMoves, defaultTurn } from "./_data";
+import { defaultBoard, defaultFen, defaultMoves } from "./_data";
 import { createPlayer } from "../user";
 
 export function startGame(game: Game) {
   if (game.state !== "ready") return;
   const flipped = Math.random() < 0.5;
+  const pwhiteUser = flipped ? game.user1 : game.user0;
+  const pblackUser = flipped ? game.user0 : game.user1;
+  const { id, timeControl, chatID, user0, user1 } = game;
   const newGame: Game = {
-    id: game.id,
-    timeControl: game.timeControl,
-    chatID: game.chatID,
+    id,
+    timeControl,
+    chatID,
     state: "playing",
     status: "normal",
     difference: 0,
-    turn: defaultTurn,
+    turn: "w",
     fen: defaultFen,
     board: defaultBoard,
     moves: defaultMoves,
     pgn: "",
-    user0: game.user0,
-    user1: game.user1,
-    pwhite: createPlayer(flipped ? game.user0 : game.user1, game.timeControl),
-    pblack: createPlayer(flipped ? game.user1 : game.user0, game.timeControl),
+    user0,
+    user1,
+    pwhite: createPlayer(pwhiteUser, timeControl, true),
+    pblack: createPlayer(pblackUser, timeControl),
   };
-  set(gamesRef(game.id), newGame);
+  update(gamesRef(id), newGame);
 }

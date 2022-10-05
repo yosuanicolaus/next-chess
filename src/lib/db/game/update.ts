@@ -1,4 +1,4 @@
-import { set } from "firebase/database";
+import { update } from "firebase/database";
 import { gamesRef } from "../../firebase";
 import { Game } from "../../types";
 import { ChessData } from "../../types";
@@ -69,5 +69,5 @@ export function updateChessData(
     newGame.pblack.active = false;
   }
 
-  set(gamesRef(game.id), newGame);
+  update(gamesRef(game.id), newGame);
 }

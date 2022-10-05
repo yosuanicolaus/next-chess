@@ -15,13 +15,13 @@ export async function createNewUser(uid: string) {
   return user;
 }
 
-export function createPlayer(user: User, timeControl: string) {
+export function createPlayer(user: User, timeControl: string, active = false) {
   const tcMinutes = Number(timeControl.split("+")[0]);
   const player: Player = {
     uid: user.uid,
     name: user.name,
     elo: user.elo,
-    active: true,
+    active: active,
     online: true,
     time: tcMinutes * 60_000,
   };
