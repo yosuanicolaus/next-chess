@@ -1,7 +1,7 @@
 import { useUser } from "../../../lib/contexts/auth";
 import { useGame } from "../../../lib/contexts/game";
-import { joinGame } from "../../../lib/db/game";
 import { GameEmpty } from "../../../lib/types";
+import { JoinButton } from "./common";
 
 export function EmptyInfo() {
   const { game } = useGame<GameEmpty>();
@@ -10,12 +10,7 @@ export function EmptyInfo() {
   return (
     <section className="hidden place-content-center gap-3 sm:grid">
       <div className="italic">Game is empty</div>
-      <button
-        className="rounded-xl border border-slate-300 text-sm shadow-md transition hover:bg-slate-600 hover:text-white"
-        onClick={() => joinGame(game.id, user)}
-      >
-        Join Game
-      </button>
+      <JoinButton gameID={game.id} user={user} />
     </section>
   );
 }
