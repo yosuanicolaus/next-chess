@@ -1,16 +1,16 @@
 import { useBoard } from "../../../lib/contexts/board";
 import { RankFile } from "../../../lib/types";
 import { forAllRankFile } from "../../../lib/utils";
+import { getFlippedRankFile } from "./utils";
 
-export default function FrontPanels() {
+export function FrontPanels() {
   const { panels, positions, size, flipped } = useBoard();
   const panelSize = size / 8;
   const frontPanels: JSX.Element[] = [];
 
   forAllRankFile((rank, file) => {
     let panel;
-    const r = flipped ? ((7 - rank) as RankFile) : rank;
-    const f = flipped ? ((7 - file) as RankFile) : file;
+    const [r, f] = getFlippedRankFile(rank, file, flipped);
     const { x, y } = positions[r][f];
     const key = `front-panel-${r}-${f}`;
     switch (panels[rank][file]) {

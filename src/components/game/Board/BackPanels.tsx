@@ -1,17 +1,16 @@
 import Image from "next/image";
 import { useBoard } from "../../../lib/contexts/board";
-import { RankFile } from "../../../lib/types";
 import { forAllRankFile } from "../../../lib/utils";
+import { getFlippedRankFile } from "./utils";
 
-export default function BackPanels() {
+export function BackPanels() {
   const { positions, size, panels, flipped } = useBoard();
   const panelSize = size / 8;
   const backPanels: JSX.Element[] = [];
 
   forAllRankFile((rank, file) => {
     if (panels[rank][file] < 2) return;
-    const r = flipped ? ((7 - rank) as RankFile) : rank;
-    const f = flipped ? ((7 - file) as RankFile) : file;
+    const [r, f] = getFlippedRankFile(rank, file, flipped);
     const { x, y } = positions[r][f];
     const code = panels[rank][file];
     backPanels.push(
@@ -36,19 +35,12 @@ type BackPanelProps = {
 };
 
 const BackPanel = ({ x, y, size, code }: BackPanelProps) => (
-  <Image
-    src={getSvgFromCode(code)}
-    width={size}
-    height={size}
-    alt=""
-    style={{
-      position: "absolute",
-      left: x,
-      top: y,
-    }}
-    // TODO: try this later
-    // className={`absolute left-[${x}px] top-[${y}px]`}
-  />
+  <div
+    style={{ width: size, height: size, left: x, top: y }}
+    className="absolute"
+  >
+    <Image src={getSvgFromCode(code)} alt={`${code}`} layout="fill" />
+  </div>
 );
 
 function getSvgFromCode(code: number) {

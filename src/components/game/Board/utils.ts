@@ -1,3 +1,4 @@
+import { RankFile } from "logichess/dist/types";
 import {
   BoardStringArray,
   PanelNumberArray,
@@ -29,4 +30,15 @@ export function createPositions(size: number): Positions {
   });
 
   return positions;
+}
+
+export function getFlippedRankFile(
+  rank: RankFile,
+  file: RankFile,
+  flipped: boolean
+) {
+  const r = flipped ? ((7 - rank) as RankFile) : rank;
+  const f = flipped ? ((7 - file) as RankFile) : file;
+  const fRF: [RankFile, RankFile] = [r, f];
+  return fRF;
 }
