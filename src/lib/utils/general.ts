@@ -11,3 +11,14 @@ export function forAllRankFile(
     }
   }
 }
+
+// https://www.codegrepper.com/code-examples/javascript/copy+text+to+clipboard+with+javascript+mobile
+// enables clipboard copy for mobile
+export function copyToClipboard(text: string) {
+  const elem = document.createElement("textarea");
+  elem.value = text;
+  document.body.appendChild(elem);
+  elem.select();
+  document.execCommand("copy");
+  document.body.removeChild(elem);
+}

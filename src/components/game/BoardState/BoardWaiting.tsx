@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { copyToClipboard } from "../../../lib/utils";
 
 export function BoardWaiting() {
-  const [gameLink, setGameLink] = useState("game link");
+  const [gameLink, setGameLink] = useState("getting game link...");
 
   useEffect(() => {
     setGameLink(window.location.href);
@@ -22,7 +23,10 @@ export function BoardWaiting() {
         />
         <button
           className="rounded border bg-slate-200 px-1 transition hover:bg-slate-100 dark:bg-slate-700 dark:hover:bg-slate-500"
-          onClick={() => navigator.clipboard.writeText(gameLink)}
+          onClick={() => {
+            copyToClipboard(gameLink);
+            alert(`copied to clipboard`);
+          }}
         >
           copy
         </button>
