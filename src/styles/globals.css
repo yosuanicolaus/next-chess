@@ -17,3 +17,12 @@
 .hover-grad-slate {
   @apply hover:from-slate-200 hover:to-slate-50 dark:hover:from-slate-500 dark:hover:to-slate-700;
 }
+
+th,
+td {
+  @apply border-b dark:border-neutral-700;
+}
+
+tr:nth-child(even) {
+  @apply bg-slate-200 dark:bg-neutral-300 dark:bg-opacity-10;
+}

@@ -15,7 +15,7 @@ export function PlayHistory() {
 
   return (
     <section className="flex h-0 flex-grow overflow-y-auto text-center">
-      <table className="my-auto flex-grow">
+      <table className="my-auto mx-1 flex-grow">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -33,7 +33,10 @@ export function PlayHistory() {
           ) : (
             <>
               {historyArray.map(({ turn, whiteSan, blackSan = "" }) => (
-                <tr key={`history-${turn}`}>
+                <tr
+                  key={`history-${turn}`}
+                  className="hover:bg-slate-300 dark:hover:bg-slate-500"
+                >
                   <td>{turn}</td>
                   <td>{whiteSan}</td>
                   <td>{blackSan}</td>
