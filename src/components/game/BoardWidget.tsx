@@ -1,5 +1,5 @@
-import { PropsWithChildren, useRef } from "react";
-import { SizeProvider, useSize } from "../../lib/contexts/size";
+import { useRef } from "react";
+import { SizeProvider } from "../../lib/contexts/size";
 import { useDimensions } from "../../lib/hooks/dimensions";
 import { BoardState } from "./BoardState";
 import { SizeContoller } from "./SizeContoller";
@@ -15,24 +15,10 @@ export function BoardWidget() {
           ref={boardContainer}
           className="flex flex-grow items-center justify-center text-center"
         >
-          <BoardSizeControl>
-            <BoardState />
-          </BoardSizeControl>
+          <BoardState />
         </div>
         <SizeContoller dim={dim} />
       </SizeProvider>
     </section>
-  );
-}
-
-function BoardSizeControl({ children }: PropsWithChildren) {
-  const { size } = useSize();
-  return (
-    <div
-      className="flex border-4 border-slate-300 dark:border-slate-600"
-      style={{ width: size, height: size }}
-    >
-      <>{children}</>
-    </div>
   );
 }
