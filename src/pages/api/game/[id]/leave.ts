@@ -16,6 +16,6 @@ export default async function handler(
   const game = await getGameByID(id);
   if (!game) throw new Error("game not found");
 
-  leaveGame(game, user);
+  leaveGame(game.id, user);
   res.status(200).json("leaving game " + id);
 }

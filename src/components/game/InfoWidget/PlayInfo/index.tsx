@@ -2,6 +2,7 @@ import { useUser } from "../../../../lib/contexts/auth";
 import { useGame } from "../../../../lib/contexts/game";
 import { GameComplete, Player } from "../../../../lib/types";
 import { PlayerInfo } from "./PlayerInfo";
+import { PlayerTimer } from "./PlayerTimer";
 import { PlayHistory } from "./PlayHistory";
 
 export type PlayerGameProps = {
@@ -14,26 +15,20 @@ export function PlayInfo() {
   const { uid } = useUser();
 
   let playerBottom, playerTop;
-  if (uid === game.pwhite.uid) {
-    playerBottom = game.pwhite;
-    playerTop = game.pblack;
-  } else if (uid === game.pblack.uid) {
-    playerBottom = game.pblack;
+  if (uid === game.pblack.uid) {
     playerTop = game.pwhite;
+    playerBottom = game.pblack;
   } else {
-    // TODO: implement viewer's perspective
-    // idea: add flipped prop to game context
-    throw new Error("Implement viewer's info perspective");
+    playerTop = game.pblack;
+    playerBottom = game.pwhite;
   }
 
   return (
     <section className="hidden sm:flex sm:flex-col">
       <PlayerInfo player={playerTop} />
-      {/* TODO: create PlayerTimer */}
-      <div>playertimer</div>
-      {/* <div className="flex-grow">(playerhistory)</div> */}
+      <PlayerTimer />
       <PlayHistory />
-      <div>playertimer</div>
+      <PlayerTimer />
       <PlayerInfo player={playerBottom} />
     </section>
   );
