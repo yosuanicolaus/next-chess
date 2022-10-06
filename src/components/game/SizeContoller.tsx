@@ -22,10 +22,7 @@ export function SizeContoller({ dim }: SizeControllerProps) {
 
   useEffect(() => {
     const shorterSide = Math.min(dim.width, dim.height);
-    if (window.innerWidth < 640) {
-      setSize(floor(shorterSide));
-      return;
-    }
+    if (window.innerWidth < 640) return setSize(floor(shorterSide));
     const distance = shorterSide - min;
     const newMax = maxRatio * distance + min;
     let recommendSize = recommendRatio * distance + min;
@@ -41,7 +38,7 @@ export function SizeContoller({ dim }: SizeControllerProps) {
 
     if (newMax < min) return;
     setMax(floor(newMax));
-    if (size > newMax) return setSize(newMax);
+    if (size > newMax) return setSize(450);
     setSize(floor(lerp(size, recommendSize, lerpStrength)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dim]);
