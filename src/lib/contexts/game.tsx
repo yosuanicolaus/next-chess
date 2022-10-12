@@ -1,4 +1,5 @@
-import { createContext, PropsWithChildren, useContext } from "react";
+import { BotAlgorithm } from "logichess-bots";
+import { createContext, PropsWithChildren, useContext, useEffect } from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { LoadingFull } from "../../components/common/Loading";
 import { GameNotFound } from "../../components/game/GameNotFound";
@@ -17,7 +18,7 @@ interface GameContextInterface {
   toggleReady: () => void;
   startGame: () => void;
   playMove: (move: Move) => void;
-  playBot: () => void;
+  playBot: (algorithm: BotAlgorithm) => void;
 }
 
 const GameContext = createContext({} as GameContextInterface);
@@ -46,13 +47,15 @@ export function GameProvider({ id, children }: PropsWithChildren<IdString>) {
     toggleReady: () => toggleReady(game),
     startGame: () => startGame(game),
     playMove: (move: Move) => playChessMove(game, move),
-    playBot: () => playBotMove(game, "random"),
+    playBot: (algorithm: BotAlgorithm) => playBotMove(game, algorithm),
   };
 
   return (
     <GameContext.Provider value={contextValue}>
       <JoinLeaveHandler>
-        <>{children}</>
+        <BotMoveHandler>
+          <>{children}</>
+        </BotMoveHandler>
       </JoinLeaveHandler>
     </GameContext.Provider>
   );
@@ -61,5 +64,19 @@ export function GameProvider({ id, children }: PropsWithChildren<IdString>) {
 function JoinLeaveHandler({ children }: PropsWithChildren) {
   const { game } = useGame();
   useJoinLeaveGame(game);
+  return <>{children}</>;
+}
+
+function BotMoveHandler({ children }: PropsWithChildren) {
+  const { game, playBot } = useGame();
+  useEffect(() => {
+    if (game.state === "playing") {
+      const currentPlayer = game.turn === "w" ? game.pwhite : game.pblack;
+      if (currentPlayer.algorithm) {
+        console.log("bot turn,", currentPlayer.algorithm);
+        playBot(currentPlayer.algorithm);
+      }
+    }
+  }, [game, playBot]);
   return <>{children}</>;
 }
