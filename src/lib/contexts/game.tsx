@@ -2,8 +2,8 @@ import { createContext, PropsWithChildren, useContext } from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { LoadingFull } from "../../components/common/Loading";
 import { GameNotFound } from "../../components/game/GameNotFound";
-import { createChessData } from "../chess";
-import { startGame, toggleReady, updateChessData } from "../db/game";
+import { playBotMove, playChessMove } from "../chess";
+import { startGame, toggleReady } from "../db/game";
 import { getUserRole } from "../db/user";
 import { gamesRef } from "../firebase";
 import { useJoinLeaveGame } from "../hooks/join-leave-game";
@@ -17,6 +17,7 @@ interface GameContextInterface {
   toggleReady: () => void;
   startGame: () => void;
   playMove: (move: Move) => void;
+  playBot: () => void;
 }
 
 const GameContext = createContext({} as GameContextInterface);
@@ -44,10 +45,8 @@ export function GameProvider({ id, children }: PropsWithChildren<IdString>) {
         (game.turn === "b" && role === "pblack")),
     toggleReady: () => toggleReady(game),
     startGame: () => startGame(game),
-    playMove(move: Move) {
-      const chessData = createChessData(move.fenResult);
-      updateChessData(game, chessData, move);
-    },
+    playMove: (move: Move) => playChessMove(game, move),
+    playBot: () => playBotMove(game, "random"),
   };
 
   return (
