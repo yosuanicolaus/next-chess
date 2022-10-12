@@ -1,6 +1,8 @@
 import { BotAlgorithm } from "logichess-bots";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useUser } from "../../lib/contexts/auth";
+import { createNewGameWithBot } from "../../lib/db/game";
 
 const selectOption: BotAlgorithm[] = [
   "random",
@@ -11,18 +13,21 @@ const selectOption: BotAlgorithm[] = [
 
 export default function GameBotPage() {
   const router = useRouter();
+  const user = useUser();
   const [selected, setSelected] = useState<BotAlgorithm>("random");
 
   return (
     <main className="flex flex-grow flex-col items-center justify-center text-center">
       <form
         className="container flex max-w-sm flex-col gap-[2px]"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           console.log(selected);
-          // TODO: go to game(complete) page & play right away
+          const game = await createNewGameWithBot(user, selected);
+          router.push(`/game/${game.id}`);
         }}
       >
+        {/* TODO: timeControl input */}
         <h1 className="mb-2 text-3xl">Play with Bot</h1>
         <label htmlFor="algorithm">Choose bot algorithm to play with</label>
         <br />
