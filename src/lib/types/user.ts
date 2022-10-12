@@ -5,10 +5,7 @@ export interface User {
   name: string;
   elo: number;
   createdAt: string;
-}
-
-export interface BotUser extends User {
-  algorithm: BotAlgorithm;
+  algorithm?: BotAlgorithm;
 }
 
 export type Role = "spectator" | "user0" | "user1" | "pwhite" | "pblack";

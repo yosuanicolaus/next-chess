@@ -1,3 +1,5 @@
+import { BotAlgorithm } from "logichess-bots";
+
 export interface Player {
   uid: string;
   name: string;
@@ -5,4 +7,5 @@ export interface Player {
   active: boolean;
   online: boolean;
   time: number;
+  algorithm?: BotAlgorithm;
 }
