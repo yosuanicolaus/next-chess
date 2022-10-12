@@ -8,6 +8,6 @@ export async function toggleReady(game: Game) {
     newGame.state = "ready";
   } else if (game.state === "ready") {
     newGame.state = "pending";
-  }
+  } else return;
   update(gamesRef(game.id), newGame);
 }

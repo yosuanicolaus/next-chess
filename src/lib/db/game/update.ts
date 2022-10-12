@@ -5,7 +5,7 @@ import { ChessData } from "../../types";
 import { Move } from "../../types";
 import { createPgn, getLastRecordsDiff } from "./_utils";
 
-export function updateChessData(
+export async function updateChessData(
   game: Game,
   chessData: ChessData,
   lastMove: Move
@@ -69,5 +69,5 @@ export function updateChessData(
     newGame.pblack.active = false;
   }
 
-  update(gamesRef(game.id), newGame);
+  await update(gamesRef(game.id), newGame);
 }

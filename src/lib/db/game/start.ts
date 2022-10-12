@@ -4,7 +4,7 @@ import { Game } from "../../types";
 import { defaultBoard, defaultFen, defaultMoves } from "./_data";
 import { createPlayer } from "../user";
 
-export function startGame(game: Game) {
+export async function startGame(game: Game) {
   if (game.state !== "ready") return;
   const flipped = Math.random() < 0.5;
   const pwhiteUser = flipped ? game.user1 : game.user0;
@@ -27,5 +27,5 @@ export function startGame(game: Game) {
     pwhite: createPlayer(pwhiteUser, timeControl, true),
     pblack: createPlayer(pblackUser, timeControl),
   };
-  update(gamesRef(id), newGame);
+  await update(gamesRef(id), newGame);
 }
