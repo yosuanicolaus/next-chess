@@ -5,7 +5,7 @@ export function RightWidget() {
     <div className="grid gap-4">
       <LinkButton href="game/join" text="Join Room" />
       <LinkButton href="game/create" text="Create Room" />
-      <LinkButton href="game/computer" text="Play with Computer" />
+      <LinkButton href="game/bot" text="Play with Bot" />
     </div>
   );
 }
