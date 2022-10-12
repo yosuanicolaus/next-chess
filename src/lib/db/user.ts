@@ -1,6 +1,7 @@
 import { get, set } from "firebase/database";
+import { BotAlgorithm } from "logichess-bots";
 import { usersRef } from "../firebase";
-import { Game, Player, Role } from "../types";
+import { BotUser, Game, Player, Role } from "../types";
 import { User } from "../types";
 import { generateName } from "../utils";
 
@@ -13,6 +14,19 @@ export async function createNewUser(uid: string) {
   };
   await set(usersRef(uid), user);
   return user;
+}
+
+export function createNewBotUser(algorithm: BotAlgorithm) {
+  const botNumber = ("00" + Math.floor(Math.random() * 1000)).slice(-3);
+  const botName = `BOT-${algorithm.toUpperCase()}-${botNumber}`;
+  const botUser: BotUser = {
+    algorithm,
+    elo: 800,
+    name: botName,
+    uid: botName,
+    createdAt: new Date().toISOString(),
+  };
+  return botUser;
 }
 
 export function createPlayer(user: User, timeControl: string, active = false) {
