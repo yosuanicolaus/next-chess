@@ -28,6 +28,7 @@ export async function createNewGameWithBot(
   const flipped = Math.random() < 0.5;
   const pwhiteUser = flipped ? user : botUser;
   const pblackUser = flipped ? botUser : user;
+  const botFaction = flipped ? "b" : "w";
 
   const game: GameComplete = {
     id: generateID(10),
@@ -43,8 +44,20 @@ export async function createNewGameWithBot(
     pgn: "",
     user0: user,
     user1: botUser,
-    pwhite: createPlayer(pwhiteUser, timeControl, true),
-    pblack: createPlayer(pblackUser, timeControl),
+    pwhite: createPlayer(
+      pwhiteUser,
+      timeControl,
+      true,
+      botFaction === "w",
+      botAlgorithm
+    ),
+    pblack: createPlayer(
+      pblackUser,
+      timeControl,
+      false,
+      botFaction === "b",
+      botAlgorithm
+    ),
   };
   await set(gamesRef(game.id), game);
   return game;

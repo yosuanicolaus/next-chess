@@ -1,7 +1,7 @@
 import { get, set } from "firebase/database";
 import { BotAlgorithm } from "logichess-bots";
 import { usersRef } from "../firebase";
-import { BotUser, Game, Player, Role } from "../types";
+import { Game, Player, Role } from "../types";
 import { User } from "../types";
 import { generateName } from "../utils";
 
@@ -19,7 +19,7 @@ export async function createNewUser(uid: string) {
 export function createNewBotUser(algorithm: BotAlgorithm) {
   const botNumber = ("00" + Math.floor(Math.random() * 1000)).slice(-3);
   const botName = `BOT-${algorithm.toUpperCase()}-${botNumber}`;
-  const botUser: BotUser = {
+  const botUser: User = {
     algorithm,
     elo: 800,
     name: botName,
@@ -29,7 +29,13 @@ export function createNewBotUser(algorithm: BotAlgorithm) {
   return botUser;
 }
 
-export function createPlayer(user: User, timeControl: string, active = false) {
+export function createPlayer(
+  user: User,
+  timeControl: string,
+  active = false,
+  bot = false,
+  algorithm: BotAlgorithm = "random"
+) {
   const tcMinutes = Number(timeControl.split("+")[0]);
   const player: Player = {
     uid: user.uid,
@@ -39,7 +45,10 @@ export function createPlayer(user: User, timeControl: string, active = false) {
     online: true,
     time: tcMinutes * 60_000,
   };
-  return player;
+  if (bot) {
+    const botPlayer = { ...player, algorithm };
+    return botPlayer;
+  } else return player;
 }
 
 export async function getUserByUID(uid: string) {
