@@ -1,14 +1,9 @@
 import { useUser } from "../../../../lib/contexts/auth";
 import { useGame } from "../../../../lib/contexts/game";
-import { GameComplete, Player } from "../../../../lib/types";
+import { GameComplete } from "../../../../lib/types";
 import { PlayerInfo } from "./PlayerInfo";
 import { PlayerTimer } from "./PlayerTimer";
 import { PlayHistory } from "./PlayHistory";
-
-export type PlayerGameProps = {
-  player: Player;
-  game: GameComplete;
-};
 
 export function PlayInfo() {
   const { game } = useGame<GameComplete>();

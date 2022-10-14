@@ -1,11 +1,7 @@
 import { RankFile } from "logichess/dist/types";
-import {
-  BoardStringArray,
-  PanelNumberArray,
-  Positions,
-} from "../../../lib/types";
-import { forAllRankFile } from "../../../lib/utils";
-import { defaultPanels, defaultPositions } from "./_default";
+import { BoardStringArray, PanelNumberArray, Positions } from "../types";
+import { forAllRankFile } from ".";
+import { defaultPanels, defaultPositions } from "../default";
 
 export const createBoardPanels = (board: BoardStringArray) => {
   const copyPanels = defaultPanels.map((arr) =>

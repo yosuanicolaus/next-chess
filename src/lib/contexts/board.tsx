@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { defaultPanels } from "../default";
 import {
   createBoardPanels,
   createPositions,
@@ -18,7 +19,7 @@ import {
   RankFile,
   RankFileObject,
 } from "../types";
-import { getTurn } from "../utils";
+import { getTurn, createBoardPanels, createPositions } from "../utils";
 import { useUser } from "./auth";
 import { useGame } from "./game";
 import { useSize } from "./size";

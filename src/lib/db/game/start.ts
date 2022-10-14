@@ -1,7 +1,7 @@
 import { update } from "firebase/database";
 import { gamesRef } from "../../firebase";
 import { Game } from "../../types";
-import { defaultFen } from "./_data";
+import { defaultFen } from "../../default";
 import { createPlayer } from "../user";
 
 export async function startGame(game: Game) {

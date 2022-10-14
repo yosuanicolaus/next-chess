@@ -1,9 +1,6 @@
 import Image from "next/image";
-import { GameComplete } from "../../../lib/types";
-import { useGame } from "../../../lib/contexts/game";
 import { useBoard } from "../../../lib/contexts/board";
-import { forAllRankFile } from "../../../lib/utils";
-import { getFlippedRankFile } from "./utils";
+import { forAllRankFile, getFlippedRankFile } from "../../../lib/utils";
 
 export function Pieces() {
   const { game } = useGame<GameComplete>();

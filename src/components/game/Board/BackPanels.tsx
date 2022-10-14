@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useBoard } from "../../../lib/contexts/board";
-import { forAllRankFile } from "../../../lib/utils";
-import { getFlippedRankFile } from "./utils";
+import { forAllRankFile, getFlippedRankFile } from "../../../lib/utils";
 
 export function BackPanels() {
   const { positions, size, panels, flipped } = useBoard();
