@@ -10,7 +10,7 @@ export function playChessMove(game: Game, move: Move) {
 }
 
 export function playBotMove(game: Game, algorithm: BotAlgorithm) {
-  if (game.state !== "playing") throw "invalid game state";
+  if (game.state !== "playing") return;
   const chess = new Chess(game.fen);
   const bot = new Bot(chess, algorithm);
   chess.play(bot.move);

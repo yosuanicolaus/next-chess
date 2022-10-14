@@ -1,7 +1,6 @@
 import { useBoard } from "../../../lib/contexts/board";
 import { RankFile } from "../../../lib/types";
-import { forAllRankFile } from "../../../lib/utils";
-import { getFlippedRankFile } from "./utils";
+import { forAllRankFile, getFlippedRankFile } from "../../../lib/utils";
 
 export function FrontPanels() {
   const { panels, positions, size, flipped } = useBoard();

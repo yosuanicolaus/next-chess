@@ -11,7 +11,7 @@ export async function updateChessData(
   lastMove: Move
 ) {
   if (game.state !== "playing") return;
-  const { status, difference, turn, fen, board, moves } = chessData;
+  const { status, turn, fen } = chessData;
 
   const {
     chatID,
@@ -29,12 +29,7 @@ export async function updateChessData(
 
   const newGame: Game = {
     state,
-    status,
-    difference,
-    turn,
     fen,
-    board,
-    moves,
     chatID,
     history,
     id,
