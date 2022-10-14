@@ -5,12 +5,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id } = req.query;
-  if (typeof id !== "string") {
-    throw new Error("id must be of type string");
-  }
+  const id = req.query.id as string;
   const chat = await getChatByID(id);
-  if (!chat) throw new Error("chat not found");
+  if (!chat) return res.status(400).json("chat not found");
 
   res.status(200).json(chat);
 }

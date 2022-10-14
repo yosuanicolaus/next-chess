@@ -1,14 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { createNewUser } from "../../../lib/db/user";
-import { User } from "../../../lib/types";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<User>
+  res: NextApiResponse
 ) {
   const { uid } = req.body;
   if (!uid) {
-    throw new Error("missing uid in body");
+    return res.status(400).json("missing uid in req.body");
   }
 
   const data = await createNewUser(uid);

@@ -6,16 +6,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const id = req.query.id;
-  if (typeof id !== "string") {
-    throw "id must be of type string";
-  }
+  const id = req.query.id as string;
 
   const game = await getGameByID(id);
   if (!game) {
-    throw "can't found game";
+    return res.status(404).json("can't found game");
   } else if (game.state !== "playing" && game.state !== "ended") {
-    throw "game.state must be playing/ended";
+    return res.status(400).json("game hasn't started yet");
   }
 
   try {
