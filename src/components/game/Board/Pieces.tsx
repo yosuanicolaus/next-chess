@@ -3,10 +3,9 @@ import { useBoard } from "../../../lib/contexts/board";
 import { forAllRankFile, getFlippedRankFile } from "../../../lib/utils";
 
 export function Pieces() {
-  const { game } = useGame<GameComplete>();
-  const { positions, size, flipped } = useBoard();
+  const { data, positions, size, flipped } = useBoard();
   const pieceSize = size / 8;
-  const board = game.board;
+  const board = data.board;
   const pieces: JSX.Element[] = [];
 
   forAllRankFile((rank, file) => {

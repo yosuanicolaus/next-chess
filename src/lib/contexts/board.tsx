@@ -1,17 +1,15 @@
+import { Chess } from "logichess";
 import {
   createContext,
   PropsWithChildren,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { defaultPanels } from "../default";
 import {
-  createBoardPanels,
-  createPositions,
-} from "../../components/game/Board/utils";
-import { defaultPanels } from "../../components/game/Board/_default";
-import {
+  ChessData,
   GameComplete,
   Move,
   PanelNumberArray,
@@ -25,6 +23,7 @@ import { useGame } from "./game";
 import { useSize } from "./size";
 
 interface BoardContextInterface {
+  data: ChessData;
   positions: Positions;
   flipped: boolean;
   size: number;
@@ -43,12 +42,17 @@ export const useBoard = () => useContext(BoardContext);
 export function BoardProvider({ children }: PropsWithChildren) {
   const { size } = useSize();
   const { uid } = useUser();
-  const { game, myTurn, playMove } = useGame<GameComplete>();
+  const { game, playMove } = useGame<GameComplete>();
+  const { data } = useMemo(() => new Chess(game.fen), [game.fen]);
   const positions = createPositions(size);
+
   const [flipped, setFlipped] = useState(uid === game.pblack.uid);
   const [panels, setPanels] = useState(defaultPanels);
   const [activeMoves, setActiveMoves] = useState<Move[]>([]);
   const [activeRF, setActiveRF] = useState<RankFileObject | null>(null);
+  const myTurn =
+    (data.turn === "w" && game.pwhite.uid === uid) ||
+    (data.turn === "b" && game.pblack.uid === uid);
 
   const setMovesFromRankFile = (rank: RankFile, file: RankFile) => {
     if (activeRF && activeRF.rank === rank && activeRF.file === file) {
@@ -57,7 +61,7 @@ export function BoardProvider({ children }: PropsWithChildren) {
 
     setActiveRF({ rank, file });
     if (myTurn) {
-      const moves = game.moves.filter(
+      const moves = data.moves.filter(
         (move) => move.from.rank === rank && move.from.file === file
       );
       setActiveMoves(moves);
@@ -66,7 +70,7 @@ export function BoardProvider({ children }: PropsWithChildren) {
   };
 
   const configurePanels = (moves: Move[], rank: RankFile, file: RankFile) => {
-    const copyPanels = createBoardPanels(game.board);
+    const copyPanels = createBoardPanels(data.board);
 
     moves.forEach((move) => {
       const { rank, file } = move.to;
@@ -102,12 +106,12 @@ export function BoardProvider({ children }: PropsWithChildren) {
   const removeFocus = () => {
     setActiveRF(null);
     setActiveMoves([]);
-    setPanels(createBoardPanels(game.board));
+    setPanels(createBoardPanels(data.board));
   };
 
   useEffect(() => {
-    setPanels(createBoardPanels(game.board));
-  }, [game.board]);
+    setPanels(createBoardPanels(data.board));
+  }, [data.board]);
 
   useEffect(() => {
     // flip board by pressing "F" key
@@ -121,6 +125,7 @@ export function BoardProvider({ children }: PropsWithChildren) {
   return (
     <BoardContext.Provider
       value={{
+        data: data,
         positions,
         flipped,
         size,
@@ -133,7 +138,7 @@ export function BoardProvider({ children }: PropsWithChildren) {
       }}
     >
       <BotHandler>
-      <>{children}</>
+        <>{children}</>
       </BotHandler>
     </BoardContext.Provider>
   );
@@ -148,7 +153,7 @@ function BotHandler({ children }: PropsWithChildren) {
       // current player is a bot
       playBot(currentPlayer.algorithm);
     }
-  }, [game, playBot]);
+  }, [game.fen, game.pwhite, game.pblack, playBot]);
 
   return <>{children}</>;
 }
