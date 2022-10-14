@@ -18,6 +18,7 @@ import {
   RankFile,
   RankFileObject,
 } from "../types";
+import { getTurn } from "../utils";
 import { useUser } from "./auth";
 import { useGame } from "./game";
 import { useSize } from "./size";
@@ -130,7 +131,23 @@ export function BoardProvider({ children }: PropsWithChildren) {
         setMovesFromRankFile,
       }}
     >
+      <BotHandler>
       <>{children}</>
+      </BotHandler>
     </BoardContext.Provider>
   );
+}
+
+function BotHandler({ children }: PropsWithChildren) {
+  const { game, playBot } = useGame<GameComplete>();
+
+  useEffect(() => {
+    const currentPlayer = getTurn(game.fen) === "w" ? game.pwhite : game.pblack;
+    if (currentPlayer.algorithm) {
+      // current player is a bot
+      playBot(currentPlayer.algorithm);
+    }
+  }, [game, playBot]);
+
+  return <>{children}</>;
 }
