@@ -1,5 +1,5 @@
 export * from "./game";
-export * from "./chess-data";
+export * from "./chess";
 export * from "./chat";
 export * from "./move";
 export * from "./player";
