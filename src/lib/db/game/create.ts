@@ -4,7 +4,7 @@ import { gamesRef } from "../../firebase";
 import { Game, GameComplete, User } from "../../types";
 import { generateID } from "../../utils";
 import { createNewBotUser, createPlayer } from "../user";
-import { defaultBoard, defaultFen, defaultMoves } from "./_data";
+import { defaultFen } from "./_data";
 
 export async function createNewGame(timeControl = "10+5") {
   const id = generateID(10);
@@ -35,12 +35,7 @@ export async function createNewGameWithBot(
     chatID: generateID(12),
     timeControl,
     state: "playing",
-    status: "normal",
-    difference: 0,
-    turn: "w",
     fen: defaultFen,
-    board: defaultBoard,
-    moves: defaultMoves,
     pgn: "",
     user0: user,
     user1: botUser,

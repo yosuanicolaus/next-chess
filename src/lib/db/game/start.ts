@@ -1,7 +1,7 @@
 import { update } from "firebase/database";
 import { gamesRef } from "../../firebase";
 import { Game } from "../../types";
-import { defaultBoard, defaultFen, defaultMoves } from "./_data";
+import { defaultFen } from "./_data";
 import { createPlayer } from "../user";
 
 export async function startGame(game: Game) {
@@ -15,12 +15,7 @@ export async function startGame(game: Game) {
     timeControl,
     chatID,
     state: "playing",
-    status: "normal",
-    difference: 0,
-    turn: "w",
     fen: defaultFen,
-    board: defaultBoard,
-    moves: defaultMoves,
     pgn: "",
     user0,
     user1,
