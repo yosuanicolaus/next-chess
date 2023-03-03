@@ -20,7 +20,7 @@ function LinkButton({ href, text }: LinkType) {
 
   return (
     <button
-      className="grad-zinc hover-grad-zinc rounded-xl border-2 border-neutral-700 bg-gradient-to-bl text-center transition hover:font-bold hover:text-emerald-800 dark:border-neutral-300 dark:hover:text-emerald-400"
+      className="grad-zinc hover-grad-zinc rounded-xl border-2 border-neutral-700 bg-gradient-to-bl py-4 text-center transition hover:font-bold hover:text-emerald-800 dark:border-neutral-300 dark:hover:text-emerald-400"
       onClick={() => router.push(href)}
     >
       {text}
