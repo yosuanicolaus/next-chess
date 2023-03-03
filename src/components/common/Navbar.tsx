@@ -12,7 +12,6 @@ export function Navbar() {
       {/* for large screen */}
       <div className="hidden flex-grow items-center gap-5 sm:flex">
         <NavLink href="/" text="LogiChess" className="text-2xl" />
-        <NavLink href="/game" text="Game" />
         <DarkToggleButton />
         <NavLink href={`/user/${user.name}`} text={user.name} />
       </div>
@@ -31,7 +30,6 @@ export function Navbar() {
         </div>
         {/* when button is click, show these items */}
         <div className={open ? "flex flex-col gap-1" : "hidden"}>
-          <NavLink href="/game" text="Game" className="mt-3" />
           <NavLink href={`/user/${user.name}`} text={user.name} />
         </div>
       </div>
